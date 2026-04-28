@@ -1,24 +1,37 @@
-# README
+# Taskel
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## サイトテーマ
+やるべきことを、みんなで前へ。タスク管理SNS
 
-Things you may want to cover:
+## テーマを選んだ理由
+タスク管理アプリを使い始めても、都度タスクを入力する
+手間が面倒になり、続けることができませんでした。
+タスク管理をした方が良いとはわかっていても、
+やるべきことを先延ばしにしてしまったり、
+こなしても達成感がなく、モチベーションが続かないと
+感じている方は多いのではないでしょうか。
+また、一人でタスクをこなし続けることへの孤独感も、
+続かない原因の一つだと考えました。
+そこで、タスクの達成を仲間と共有し、
+お互いに助け合いながら前進できるアプリがあれば、
+そのような方の助けになると考え、このテーマにしました。
 
-* Ruby version
+## ターゲットユーザー
+- タスク管理が続かない人
+- 周りの目があれば頑張れるが、一人だと続かない人
 
-* System dependencies
+## 主な利用シーン
+- 買い物やジムなど、日々のちょっとしたタスクをメモ代わりに使いたい時
+- 学習や仕事のやることを書き残したい時
+- 誰かと一緒に頑張りたい時
 
-* Configuration
+## 設計書
+後ほど作成予定
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## 開発環境
+- OS：Linux(CentOS)
+- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- フレームワーク：Ruby on Rails
+- JSライブラリ：jQuery
+- IDE：VSCode + EC2(SSH接続)
+- データベース：SQLite
