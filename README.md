@@ -26,8 +26,9 @@
 - 誰かと一緒に頑張りたい時
 
 ## 設計書
-後ほど作成予定
-
+- uiflows
+- ER図
+- 
 ## 開発環境
 - OS：Linux(CentOS)
 - 言語：HTML,CSS,JavaScript,Ruby,SQL
