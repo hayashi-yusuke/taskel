@@ -9,15 +9,26 @@
 
   <%= f.label :difficulty, "難易度" %>
   <% Task.difficulties.each_key do |level| %>
-    <%= f.radio_button :difficulty, level %>
+    <%= f.radio_button :difficulty, level, checked: level == "normal" %>
     <%= f.label "difficulty_#{level}", level %>
   <% end %>
 
   <%= f.label :priority, "優先度" %>
   <% Task.priorities.each_key do |level| %>
-    <%= f.radio_button :priority, level %>
+    <%= f.radio_button :priority, level, checked: level == "middle" %>
     <%= f.label "priority_#{level}", level %>
   <% end %>
 
   <%= f.submit "作成する" %>
+<% end %>
+
+<h2>タスク一覧</h2>
+
+<% Current.user.tasks.where(completed: false).each do |task| %>
+  <p><%= task.content %></p>
+  <p>難易度 : <%= task.difficulty %></p>
+  <p>優先度 : <%= task.priority %></p>
+  <%= button_to "完了にする✅", complete_task_path(task), method: :patch %>
+  <p><%= link_to "編集", edit_task_path(task) %></p>
+  <p><%= button_to "削除", task_path(task), method: :delete %></p>
 <% end %>
