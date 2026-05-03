@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   allow_unauthenticated_access only: [:new, :create]
 
   def mypage
+    @task = Task.new
   end
 
   def new
