@@ -18,15 +18,26 @@ class UsersController < ApplicationController
   end
 
   def show
+    @user = User.find(params[:id])
   end
 
   def edit
+    @user = Current.user
   end
 
   def update
+    @user = Current.user
+    if @user.update(user_params)
+      redirect_to mypage_path, notice: "プロフィールを更新しました"
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    redirect_to root_path, notice: "アカウントを削除しました"
   end
 
   private
