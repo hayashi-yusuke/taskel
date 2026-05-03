@@ -1,2 +1,4 @@
-<h1>Users#mypage</h1>
-<p>Find me in app/views/users/mypage.html.erb</p>
+<h1><%= Current.user.name %>のマイページ</h1>
+
+<%= link_to "プロフィール編集", edit_user_path(Current.user) %>
+<%= button_to "退会", user_path(Current.user), method: :delete, data: { turbo_confirm: "本当に退会しますか?" } %>
