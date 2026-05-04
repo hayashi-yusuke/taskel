@@ -2,5 +2,6 @@
 <p>仲間と助け合いながらタスク管理ができるSNSサイト</p>
 
 <%= link_to "新規登録", new_user_path %>
+<%= button_to "ゲストとしてログイン", guest_login_path, method: :post %>
 <%= link_to "ログイン", new_session_path %>
 <%= link_to "アバウト", about_path %>

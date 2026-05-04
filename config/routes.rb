@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   resource :session
+  post "/guest_login", to: "sessions#guest_login", as: :guest_login
   resources :passwords, param: :token
 
   get "/", to: "homes#top", as: :root
