@@ -1,6 +1,17 @@
 <h1>タスク編集</h1>
 
 <%= form_with model: @task do |f| %>
+  <% if @task.errors.any? %>
+    <div>
+      <ul>
+        <% @task.errors.full_messages.each do |message| %>
+          <li>
+            <%= message %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
   <%= f.label :content, "内容" %>
   <%= f.text_field :content %>
 
