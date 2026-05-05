@@ -34,4 +34,5 @@
   </div>
 
     <%= f.submit "更新する" %>
+    <%= button_to "退会", user_path(Current.user), method: :delete, data: { turbo_confirm: "本当に退会しますか?" } %>
   <% end %>
