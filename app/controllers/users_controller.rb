@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  allow_unauthenticated_access only: [:new, :create]
+  allow_unauthenticated_access only: [ :new, :create ]
 
   def mypage
     @task = Task.new
@@ -20,6 +20,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @tasks = @user.tasks.where(completed: false)
   end
 
   def edit
@@ -46,5 +47,4 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :email_address, :password, :password_confirmation)
   end
-
 end
