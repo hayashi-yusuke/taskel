@@ -32,7 +32,7 @@ class TasksController < ApplicationController
   def destroy
     @task = Task.find(params[:id])
     @task.destroy
-    redirect_to mypage_path, notice: "タスクを削除しました" 
+    redirect_to mypage_path, notice: "タスクを削除しました"
   end
 
   def complete
@@ -44,6 +44,6 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:content, :difficulty, :priority ) 
+    params.require(:task).permit(:content, :difficulty, :priority)
   end
 end
