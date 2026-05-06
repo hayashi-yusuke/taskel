@@ -1,32 +1,48 @@
-<h1>タスク編集</h1>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <h1>タスク編集</h1>
 
-<%= form_with model: @task do |f| %>
-  <% if @task.errors.any? %>
-    <div>
-      <ul>
-        <% @task.errors.full_messages.each do |message| %>
-          <li>
-            <%= message %>
-          </li>
+      <%= form_with model: @task do |f| %>
+        <% if @task.errors.any? %>
+          <div class="alert alert-danger">
+            <ul>
+              <% @task.errors.full_messages.each do |message| %>
+                <li>
+                  <%= message %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
         <% end %>
-      </ul>
+        <%= f.label :content, "内容", class: "form-label" %>
+        <%= f.text_field :content, class: "form-control mb-3" %>
+
+        <%= f.label :difficulty, "難易度", class: "form-label" %>
+        <div class="d-flex gap-3 mb-3">
+          <% Task.difficulties.each_key do |level| %>
+            <div class="form-check">
+              <%= f.radio_button :difficulty, level, class: "form-check-input" %>
+              <%= f.label "difficulty_#{level}", level, class: "form-check-label" %>
+            </div>
+          <% end %>
+        </div>
+
+        <%= f.label :priority, "優先度", class: "form-label" %>
+        <div class="d-flex gap-3 mb-5">
+          <% Task.priorities.each_key do |level| %>
+            <div class="form-check">
+              <%= f.radio_button :priority, level, class: "form-check-input" %>
+              <%= f.label "priority_#{level}", level, class: "form-check-label" %>
+            </div>
+          <% end %>
+        </div>
+
+        <%= f.submit "更新する", class: "btn btn-primary w-100" %>
+        <div class="text-center mt-3">
+          <%= link_to "戻る", mypage_path %>
+        </div>
+      <% end %>
     </div>
-  <% end %>
-  <%= f.label :content, "内容" %>
-  <%= f.text_field :content %>
-
-  <%= f.label :difficulty, "難易度" %>
-  <% Task.difficulties.each_key do |level| %>
-    <%= f.radio_button :difficulty, level %>
-    <%= f.label "difficulty_#{level}", level %>
-  <% end %>
-
-  <%= f.label :priority, "優先度" %>
-  <% Task.priorities.each_key do |level| %>
-    <%= f.radio_button :priority, level %>
-    <%= f.label "priority_#{level}", level %>
-  <% end %>
-
-  <%= f.submit "更新する" %>
-
-<% end %>
+  </div>
+</div>
