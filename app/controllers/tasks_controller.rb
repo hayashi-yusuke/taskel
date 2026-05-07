@@ -8,7 +8,8 @@ class TasksController < ApplicationController
     if @task.save
       redirect_to mypage_path, notice: "タスクを作成しました"
     else
-      redirect_to mypage_path, alert: "タスクの作成に失敗しました"
+      flash[:alert] = @task.errors.full_messages.join(", ")
+      redirect_to mypage_path
     end
   end
 
