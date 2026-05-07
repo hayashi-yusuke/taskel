@@ -32,6 +32,7 @@
           <%= link_to "Taskel", root_path, class: "navbar-brand" %>
             <% if authenticated? %>
               <div class="d-flex align-items-center">
+                <%= link_to "About", about_path, class: "nav-link text-white me-3" %>
                 <%= link_to "タスク一覧", tasks_path, class: "nav-link text-white me-3" %>
                 <%= button_to "ログアウト", session_path, method: :delete, class: "btn btn-outline-light" %>
               </div>
@@ -39,6 +40,16 @@
         </div>
       </nav>
     </header>
+    <% if flash[:notice] %>
+      <div class="alert alert-success mx-3 mt-3">
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
+    <% if flash[:alert] %>
+      <div class="alert alert-danger mx-3 mt-3">
+        <%= flash[:alert] %>
+      </div>
+    <% end %>
     <%= yield %>
   </body>
 </html>

@@ -24,6 +24,10 @@ class UsersController < ApplicationController
   end
 
   def edit
+    if params[:id].to_i != Current.user.id
+      redirect_to mypage_path, alert: "アクセスできません"
+      return
+    end
     @user = Current.user
   end
 
@@ -37,8 +41,8 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user = User.find(params[:id])
-    @user.destroy
+    Current.user.destroy
+    terminate_session
     redirect_to root_path, notice: "アカウントを削除しました"
   end
 
