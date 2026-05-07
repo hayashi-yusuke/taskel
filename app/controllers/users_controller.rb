@@ -24,6 +24,10 @@ class UsersController < ApplicationController
   end
 
   def edit
+    if params[:id].to_i != Current.user.id
+      redirect_to mypage_path, alert: "アクセスできません"
+      return
+    end
     @user = Current.user
   end
 

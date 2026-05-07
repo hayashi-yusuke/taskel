@@ -1,4 +1,7 @@
 class TasksController < ApplicationController
+  before_action :set_task, only: [:edit, :update, :destroy]
+  before_action :authorize_task, only: [:edit, :update, :destroy]
+
   def index
     @tasks = Task.where(completed: false)
   end
@@ -18,11 +21,9 @@ class TasksController < ApplicationController
   end
 
   def edit
-    @task = Task.find(params[:id])
   end
 
   def update
-    @task = Task.find(params[:id])
     if @task.update(task_params)
       redirect_to mypage_path, notice: "編集が完了しました"
     else
@@ -31,7 +32,6 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    @task = Task.find(params[:id])
     @task.destroy
     redirect_to mypage_path, notice: "タスクを削除しました"
   end
@@ -46,5 +46,16 @@ class TasksController < ApplicationController
 
   def task_params
     params.require(:task).permit(:content, :difficulty, :priority)
+  end
+
+  def set_task
+    @task = Task.find(params[:id])
+  end
+
+  def authorize_task
+    if @task.user_id != Current.user.id
+      redirect_to tasks_path, alert: "アクセスできません"
+      return
+    end
   end
 end
