@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get "/about", to: "homes#about", as: :about
 
   get "/mypage", to: "users#mypage", as: :mypage
-  resources :users, only: [ :new, :create, :edit, :show, :update, :destroy ]
+  resources :users, only: [ :index, :new, :create, :edit, :show, :update, :destroy ]
 
   resources :tasks, only: [ :index, :show, :create, :edit, :update, :destroy ] do
     member do
