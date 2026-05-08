@@ -57,7 +57,7 @@
       <% Current.user.tasks.where(completed: false).each do |task| %>
         <div class="card mb-3">
           <div class="card-body">
-            <p class="fw-bold mb-1"><%= task.content %></p>
+            <p class="fw-bold mb-1"><%= link_to task.content, task_path(task) %></p>
             <p class="text-muted small mb-2">難易度 : <%= task.difficulty %> ／ 優先度 : <%= task.priority %></p>
             <div class="d-flex gap-2">
               <%= button_to "完了にする", complete_task_path(task), method: :patch, class: "btn btn-outline-primary btn-sm" %>

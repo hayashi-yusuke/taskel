@@ -1,2 +1,17 @@
-<h1>Tasks#show</h1>
-<p>Find me in app/views/tasks/show.html.erb</p>
+<%= @task.content %>
+<%= @task.difficulty %> / <%= @task.priority %>
+<%= @task.created_at.strftime("%Y年%m月%d日 %H:%M") %>
+
+<% @task.comments.each do |comment| %>
+  <%= comment.user.name %>
+  <%= comment.content %>
+  <%= comment.created_at.strftime("%Y年%m月%d日 %H:%M") %>
+  <% if comment.user_id == Current.user.id %>
+    <%= button_to "削除",task_comment_path(@task, comment), method: :delete %>
+  <% end %>
+<% end %>
+
+<%= form_with model: [@task, @comment] do |f| %>
+  <%=  f.label :content, "コメント" %>
+  <%= f.text_field :content %>
+<% end %>

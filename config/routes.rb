@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     member do
       patch :complete
     end
+    resources :comments, only: [ :create, :destroy ]
   end
 
   get "up" => "rails/health#show", as: :rails_health_check
