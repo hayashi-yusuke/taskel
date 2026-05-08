@@ -1,3 +1,8 @@
+Admin.find_or_create_by!(email_address: "admin@example.com") do |admin|
+  admin.password = "password"
+  admin.password_confirmation = "password"
+end
+
 User.find_or_create_by!(email_address: "guest@example.com") do |user|
   user.name = "ゲストユーザー"
   user.password = "password"

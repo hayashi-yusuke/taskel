@@ -1,0 +1,11 @@
+<%= form_with url: admin_tasks_path, method: :get do |f| %>
+  <%= f.text_field :q, placeholder: "タスクを検索", value: params[:q] %>
+  <%= f.submit "検索" %>
+<% end %>
+
+<% @tasks.each do |task| %>
+  <%= task.content %>
+  <p>難易度: <%= task.difficulty %> ／ 優先度: <%= task.priority %></p>
+  <%= task.user.name %>
+  <%= button_to "削除", admin_task_path(task), method: :delete %>
+<% end %>

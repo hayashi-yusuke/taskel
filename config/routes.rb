@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    resource :session, only: [:new, :create, :destroy]
+    get "top", to: "homes#top", as: :top
+    resources :users, only: [:index, :destroy]
+    resources :tasks, only: [:index, :destroy]
+  end
+
   resource :session
   post "/guest_login", to: "sessions#guest_login", as: :guest_login
   resources :passwords, param: :token
