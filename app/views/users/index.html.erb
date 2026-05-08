@@ -1,0 +1,9 @@
+<% if params[:q].present? %>
+  <% if @users.empty? %>
+    <p>一致するユーザーは見つかりませんでした</p>
+  <% else %>
+    <% @users.each do |user| %>
+      <%= link_to user.name, user_path(user) %>
+    <% end %>
+  <% end %>
+<% end %>

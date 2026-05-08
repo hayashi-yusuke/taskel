@@ -5,6 +5,14 @@ class UsersController < ApplicationController
     @task = Task.new
   end
 
+  def index
+    if params[:q].present?
+      @users = User.where("name LIKE ?", "%#{params[:q]}%")
+    else
+      @users = User.none
+    end
+  end
+
   def new
     @user = User.new
   end
