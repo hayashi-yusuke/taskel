@@ -1,11 +1,31 @@
-<%= form_with url: admin_tasks_path, method: :get do |f| %>
-  <%= f.text_field :q, placeholder: "タスクを検索", value: params[:q] %>
-  <%= f.submit "検索" %>
-<% end %>
+<div class="container mt-5">
+  <h1 class="mb-4">タスク管理</h1>
 
-<% @tasks.each do |task| %>
-  <%= task.content %>
-  <p>難易度: <%= task.difficulty %> ／ 優先度: <%= task.priority %></p>
-  <%= task.user.name %>
-  <%= button_to "削除", admin_task_path(task), method: :delete %>
-<% end %>
+  <%= form_with url: admin_tasks_path, method: :get, class: "d-flex gap-2 mb-4" do |f| %>
+    <%= f.text_field :q, placeholder: "タスクを検索", value: params[:q], class: "form-control w-25" %>
+    <%= f.submit "検索", class: "btn btn-outline-secondary" %>
+  <% end %>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>内容</th>
+        <th>投稿者</th>
+        <th>難易度</th>
+        <th>優先度</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @tasks.each do |task| %>
+        <tr>
+          <td><%= task.content %></td>
+          <td><%= task.user.name %></td>
+          <td><%= task.difficulty %></td>
+          <td><%= task.priority %></td>
+          <td><%= button_to "削除", admin_task_path(task), method: :delete %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
