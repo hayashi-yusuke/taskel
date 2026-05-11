@@ -1,14 +1,29 @@
-<h1>ユーザー管理</h1>
+<div class="container mt-5">
+  <h1 class="mb-4">ユーザー管理</h1>
 
-<%= form_with url: admin_users_path, method: :get do |f| %>
-  <%= f.text_field :q, placeholder: "ユーザーを検索", value: params[:q] %>
-  <%= f.submit "検索" %>
-<% end %>
+  <%= form_with url: admin_users_path, method: :get, class: "d-flex gap-2 mb-4" do |f| %>
+    <%= f.text_field :q, placeholder: "ユーザーを検索", value: params[:q], class: "form-control w-25" %>
+    <%= f.submit "検索", class: "btn btn-outline-secondary" %>
+  <% end %>
 
-<% @users.each do |user| %>
-  <div>
-    <%= user.name %>
-    <%= user.email_address %>
-    <%= button_to "削除", admin_user_path(user), method: :delete %>
-  </div>
-<% end %>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>名前</th>
+        <th>メールアドレス</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.name %></td>
+          <td><%= user.email_address %></td>
+          <td>
+            <%= button_to "削除", admin_user_path(user), method: :delete %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
