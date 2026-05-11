@@ -1,0 +1,16 @@
+<div class="container mt-5">
+  <div class="row justify-content-center text-center">
+    <div class="col-md-6">
+
+      <h1 class="display-4 fw-bold mb-3">Taskel</h1>
+      <p class="lead mb-5">仲間と助け合いながらタスク管理ができるSNSサイト</p>
+
+      <div>
+        <%= link_to "新規登録", new_user_path, class: "btn btn-primary btn-lg w-100 mb-3" %>
+        <%= link_to "ログイン", new_session_path, class: "btn btn-outline-secondary btn-lg w-100 mb-3" %>
+        <%= button_to "ゲストとしてログイン", guest_login_path, method: :post, class: "btn btn-outline-primary btn-lg w-100 mb-3" %>
+        <%= link_to "アバウト", about_path, class: "btn btn-link" %>
+      </div>
+    </div>
+  </div>
+</div>
