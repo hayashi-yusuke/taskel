@@ -34,9 +34,9 @@
               <div class="d-flex align-items-center">
                 <%= link_to "About", about_path, class: "nav-link text-white me-3" %>
                 <%= link_to "タスク一覧", tasks_path, class: "nav-link text-white me-3" %>
-                <%= form_with url: users_path, method: :get do |f| %>
-                  <%= f.text_field :q, placeholder: "ユーザーを検索", value: params[:q] %>
-                  <%= f.submit "検索" %>
+                <%= form_with url: users_path, method: :get, class: "d-flex gap-2 me-2" do |f| %>
+                  <%= f.text_field :q, placeholder: "ユーザーを検索", value: params[:q], class: "form-control form-control-sm" %>
+                  <%= f.submit "検索", class: "btn btn-light btn-sm" %>
                 <% end %>
                 <%= button_to "ログアウト", session_path, method: :delete, class: "btn btn-outline-light" %>
               </div>

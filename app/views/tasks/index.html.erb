@@ -1,8 +1,8 @@
 <div class="container mt-5">
   <h3 class="mb-4">タスク一覧</h3>
-  <%= form_with url: tasks_path, method: :get do |f| %>
-    <%= f.text_field :q, placeholder: "タスクを検索", value: params[:q] %>
-    <%= f.submit "検索" %>
+  <%= form_with url: tasks_path, method: :get, class: "d-flex gap-2 mb-4" do |f| %>
+    <%= f.text_field :q, placeholder: "タスクを検索", value: params[:q], class: "form-control w-25" %>
+    <%= f.submit "検索", class: "btn btn-outline-secondary" %>
   <% end %>
 
   <% @tasks.each do |task| %>
