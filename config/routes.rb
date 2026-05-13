@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get "/about", to: "homes#about", as: :about
 
   get "/mypage", to: "users#mypage", as: :mypage
+  get "/likes", to: "likes#index", as: :likes
   resources :users, only: [ :index, :new, :create, :edit, :show, :update, :destroy ]
 
   resources :tasks, only: [ :index, :show, :create, :edit, :update, :destroy ] do

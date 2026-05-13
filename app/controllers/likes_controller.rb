@@ -1,5 +1,9 @@
 class LikesController < ApplicationController
 
+  def index
+    @tasks = Current.user.likes.includes(:task).map{|like| like.task }
+  end
+
   def create
     @task = Task.find(params[:task_id])
     like = Current.user.likes.build(task: @task)
