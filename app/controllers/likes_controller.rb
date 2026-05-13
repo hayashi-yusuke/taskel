@@ -5,9 +5,9 @@ class LikesController < ApplicationController
     like = Current.user.likes.build(task: @task)
 
     if like.save
-      redirect_back fallback_location: root_path, notice: "いいねしました！"
+      redirect_back fallback_location: root_path, notice: "エールを送りました！"
     else
-      redirect_back fallback_location: root_path, alert: "いいねに失敗しました"
+      redirect_back fallback_location: root_path, alert: "エールに失敗しました"
     end
   end
 
@@ -15,6 +15,6 @@ class LikesController < ApplicationController
     @task = Task.find(params[:task_id])
     like = Current.user.likes.find_by(task: @task)
     like&.destroy
-    redirect_back fallback_location: root_path, notice: "いいねを取り消しました"
+    redirect_back fallback_location: root_path, notice: "エールを取り消しました"
   end
 end
