@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   namespace :admin do
     resource :session, only: [:new, :create, :destroy]
     get "top", to: "homes#top", as: :top
@@ -21,6 +22,7 @@ Rails.application.routes.draw do
       patch :complete
     end
     resources :comments, only: [ :create, :destroy ]
+    resource :like, only: [ :create, :destroy ]
   end
 
   get "up" => "rails/health#show", as: :rails_health_check
