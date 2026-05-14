@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   namespace :admin do
     resource :session, only: [:new, :create, :destroy]
     get "top", to: "homes#top", as: :top
@@ -14,6 +15,7 @@ Rails.application.routes.draw do
   get "/about", to: "homes#about", as: :about
 
   get "/mypage", to: "users#mypage", as: :mypage
+  get "/likes", to: "likes#index", as: :likes
   resources :users, only: [ :index, :new, :create, :edit, :show, :update, :destroy ]
 
   resources :tasks, only: [ :index, :show, :create, :edit, :update, :destroy ] do
@@ -21,6 +23,7 @@ Rails.application.routes.draw do
       patch :complete
     end
     resources :comments, only: [ :create, :destroy ]
+    resource :like, only: [ :create, :destroy ]
   end
 
   get "up" => "rails/health#show", as: :rails_health_check

@@ -1,0 +1,18 @@
+<div class="container mt-5">
+  <h3 class="mb-4">エール一覧</h3>
+
+  <% if @tasks.empty? %>
+    <p class="text-muted">まだエールを送ったタスクがありません<br>みんなのタスクにエールを送りましょう！</p>
+  <% else %>
+    <% @tasks.each do |task| %>
+      <div class="card mb-3">
+        <div class="card-body">
+          <p class="fw-bold mb-1"> <%= link_to task.content, task_path(task) %></p>
+          <p class="text-muted small mb-2">難易度: <%= task.difficulty %> ／ 優先度: <%= task.priority %></p>
+          <%= link_to task.user.name, user_path(task.user), class: "small" %>
+          <%= render "likes/like_button", task: task %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
