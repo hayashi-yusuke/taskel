@@ -1,13 +1,15 @@
-<% if authenticated? %>
-  <% if Current.user.likes.exists?(task: task) %>
-    <%= button_to task_like_path(task), method: :delete, class: "btn btn-danger btn-sm" do %>
-      🔥 <%= task.likes.count%>
+<div id="like_task_<%= task.id %>">
+  <% if authenticated? %>
+    <% if Current.user.likes.exists?(task: task) %>
+      <%= button_to task_like_path(task), method: :delete, class: "btn btn-danger btn-sm" do %>
+        🔥 <%= task.likes.count%>
+      <% end %>
+    <% else %>
+      <%= button_to task_like_path(task), method: :post, class: "btn btn-outline-danger btn-sm" do %>
+        🩶 エールを送る <%= task.likes.count %>
+      <% end %>
     <% end %>
   <% else %>
-    <%= button_to task_like_path(task), method: :post, class: "btn btn-outline-danger btn-sm" do %>
-      🩶 エールを送る <%= task.likes.count %>
-    <% end %>
+    <span class="text-muted">🩶 <%= task.likes.count %></span>
   <% end %>
-<% else %>
-  <span class="text-muted">🩶 <%= task.likes.count %></span>
-<% end %>
+</div>
