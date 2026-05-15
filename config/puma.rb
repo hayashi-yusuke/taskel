@@ -31,7 +31,7 @@ threads threads_count, threads_count
 # Specifies the `port` that Puma will listen on to receive requests; default is 3000.
 # port ENV.fetch("PORT", 3000)
 if ENV["RAILS_ENV"] == "production"
-  bind "unix:///home/ubuntu/environment/taskel/tmp/sockets/puma.sock"
+  bind "unix:///home/ubuntu/taskel/tmp/sockets/puma.sock"
 end
 # Allow puma to be restarted by `bin/rails restart` command.
 plugin :tmp_restart

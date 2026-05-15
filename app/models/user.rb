@@ -12,6 +12,8 @@ class User < ApplicationRecord
                                    dependent: :destroy
   has_many :followings, through: :active_relationships, source: :following
   has_many :followers, through: :passive_relationships, source: :follower
+
+  has_many :likes, dependent: :destroy
   
   normalizes :email_address, with: ->(e) { e.strip.downcase }
 
