@@ -8,6 +8,7 @@
         <div class="card mb-3">
           <div class="card-body">
             <%= link_to user.name, user_path(user) %>
+            <%= render "follows/follow_button", user: user %>
           </div>
         </div>
       <% end %>
