@@ -17,6 +17,15 @@
     <%= f.hidden_field :status, value: params[:status] %>
     <%= f.select :difficulty, [["難易度（すべて）", ""], ["easy", 1], ["normal", 2], ["hard", 3]], {selected: params[:difficulty]}, class: "form-select w-auto" %>
     <%= f.select :priority, [["優先度（すべて）", ""], ["low", 1], ["middle", 2], ["high", 3]], {selected: params[:priority]}, class: "form-select w-auto" %>
+    <%= f.select :sort,[
+      ["新しい順", "newest"],
+      ["古い順", "oldest"],
+      ["難易度高い順", "difficulty_high"],
+      ["難易度低い順", "difficulty_low"],
+      ["優先度高い順", "priority_high"],
+      ["優先度低い順", "priority_low"],
+      ["エール数順", "likes"]
+    ], { selected: params[:sort] }, class: "form-select w-auto" %>
     <%= f.text_field :q, placeholder: "タスクを検索", value: params[:q], class: "form-control w-25" %>
     <%= f.submit "検索", class: "btn btn-outline-secondary" %>
   <% end %>
