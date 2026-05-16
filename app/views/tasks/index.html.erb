@@ -1,6 +1,22 @@
 <div class="container mt-5">
   <h3 class="mb-4">タスク一覧</h3>
+
+  <ul class="nav nav-tabs mb-3">
+    <li class="nav-item">
+      <%= link_to "未完了", tasks_path(status: "incomplete"), class: "nav-link #{params[:status].blank? ? 'active' : ''}" %>
+    </li>
+    <li class="nav-item">
+      <%= link_to "完了済み", tasks_path(status: "completed"), class: "nav-link #{params[:status] == 'completed' ? 'active' : ''}" %>
+    </li>
+    <li class="nav-item">
+      <%= link_to "すべて", tasks_path(status: "all"), class: "nav-link #{params[:status] == 'all' ? 'active' : ''}" %>
+    </li>
+  </ul>
+
   <%= form_with url: tasks_path, method: :get, class: "d-flex gap-2 mb-4" do |f| %>
+    <%= f.hidden_field :status, value: params[:status] %>
+    <%= f.select :difficulty, [["難易度（すべて）", ""], ["easy", 1], ["normal", 2], ["hard", 3]], {selected: params[:difficulty]}, class: "form-select w-auto" %>
+    <%= f.select :priority, [["優先度（すべて）", ""], ["low", 1], ["middle", 2], ["high", 3]], {selected: params[:priority]}, class: "form-select w-auto" %>
     <%= f.text_field :q, placeholder: "タスクを検索", value: params[:q], class: "form-control w-25" %>
     <%= f.submit "検索", class: "btn btn-outline-secondary" %>
   <% end %>
