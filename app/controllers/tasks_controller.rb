@@ -3,11 +3,17 @@ class TasksController < ApplicationController
   before_action :authorize_task, only: [:edit, :update, :destroy]
 
   def index
-    if params[:q].present?
-      @tasks = Task.where(completed: false).where("content LIKE ?", "%#{params[:q]}%")
-    else
-      @tasks = Task.where(completed: false)
-    end
+    @tasks = case params[:status]
+             when "completed"
+               Task.where(completed: true)
+             when "all"
+               Task.all
+             else
+               Task.where(completed: false)
+             end
+    @tasks = @tasks.where(difficulty: params[:difficulty]) if params[:difficulty].present?
+    @tasks = @tasks.where(priority: params[:priority]) if params[:priority].present?
+    @tasks = @tasks.where("content LIKE ?", "%#{params[:q]}%") if params[:q].present?
   end
 
   def create
