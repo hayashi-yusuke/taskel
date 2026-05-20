@@ -41,6 +41,14 @@ class UsersController < ApplicationController
 
   def update
     @user = Current.user
+
+    if Current.user.email_address == "guest@example.com"
+      if user_params[:email_address].present? || user_params[:password].present?
+        redirect_to mypage_path, alert: "ゲストユーザーはメールアドレスとパスワードメールアドレスとパスワードを変更できません"
+        return
+      end
+    end
+
     if @user.update(user_params)
       redirect_to mypage_path, notice: "プロフィールを更新しました"
     else

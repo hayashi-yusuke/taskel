@@ -21,20 +21,24 @@
           <%= f.text_field :name, class: "form-control mb-3" %>
         </div>
 
-        <div>
-          <%= f.label :email_address, "メールアドレス", class: "form-label" %>
-          <%= f.email_field :email_address, class: "form-control mb-3" %>
-        </div>
+        <% unless Current.user.email_address == "guest@example.com" %>
 
-        <div>
-          <%= f.label :password, "パスワード", class: "form-label" %>
-          <%= f.password_field :password, class: "form-control mb-3" %>
-        </div>
+          <div>
+            <%= f.label :email_address, "メールアドレス", class: "form-label" %>
+            <%= f.email_field :email_address, class: "form-control mb-3" %>
+          </div>
 
-        <div>
-          <%= f.label :password_confirmation, "パスワード確認", class: "form-label" %>
-          <%= f.password_field :password_confirmation, class: "form-control mb-5" %>
-        </div>
+          <div>
+            <%= f.label :password, "パスワード", class: "form-label" %>
+            <%= f.password_field :password, class: "form-control mb-3" %>
+          </div>
+
+          <div>
+            <%= f.label :password_confirmation, "パスワード確認", class: "form-label" %>
+            <%= f.password_field :password_confirmation, class: "form-control mb-5" %>
+          </div>
+        
+        <% end %>
 
         <%= f.submit "更新する", class: "btn btn-primary w-100" %>
       <% end %>
