@@ -15,6 +15,10 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    if Current.user.email_address == "guest@example.com"
+      Current.user.tasks.destroy_all
+      Current.user.update(name: "ゲストユーザー")
+    end
     terminate_session
     redirect_to about_path, status: :see_other
   end
