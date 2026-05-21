@@ -6,7 +6,7 @@
 
 <ul class="nav nav-tabs mb-3">
   <li class="nav-item">
-    <%= link_to "未完了", tasks_path(status: "incomplete"), class: "nav-link #{params[:status].blank? ? 'active' : ''}" %>
+    <%= link_to "未完了", tasks_path(status: "incomplete"), class: "nav-link #{params[:status].blank? || params[:status] == 'incomplete' ? 'active' : ''}" %>
   </li>
   <li class="nav-item">
     <%= link_to "完了済み", tasks_path(status: "completed"), class: "nav-link #{params[:status] == 'completed' ? 'active' : ''}" %>
@@ -34,9 +34,9 @@
 <% end %>
 
 <% @tasks.each do |task| %>
-  <div class="card mb-3">
+  <div class="card mb-3 <%= 'bg-light' if task.completed %>">
     <div class="card-body">
-      <p class="fw-bold mb-1"> <%= link_to task.content, task_path(task) %></p>
+      <p class="fw-bold mb-1 <%= 'text-decoration-line-through text-muted' if task.completed %>"> <%= link_to task.content, task_path(task) %></p>
       <p class="text-muted small mb-2">難易度: <%= task.difficulty %> ／ 優先度: <%= task.priority %></p>
       <%= link_to task.user.name, user_path(task.user), class: "small" %>
       <%= render "likes/like_button", task: task %>
