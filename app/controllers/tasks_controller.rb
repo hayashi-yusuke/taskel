@@ -30,7 +30,7 @@ class TasksController < ApplicationController
                @tasks.left_joins(:likes).group(:id).order("COUNT(likes.id) DESC")
              else
                @tasks.order(created_at: :desc)
-             end
+             end.page(params[:page]).per(5)
   end
 
 
