@@ -40,3 +40,19 @@
   transition: all 0.6s ease;
   overflow: hidden;
 }
+.page-link {
+  border-radius: 50% !important;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.page-item:first-child .page-link,
+.page-item:last-child .page-link,
+.page-item:nth-child(2) .page-link,
+.page-item:nth-last-child(2) .page-link {
+  border-radius: 18px !important;
+  width: auto;
+  padding: 0 12px;
+}
