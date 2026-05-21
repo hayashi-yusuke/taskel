@@ -8,12 +8,18 @@
   <p class="text-muted">まだエールを送ったタスクがありません<br>みんなのタスクにエールを送りましょう！</p>
 <% else %>
   <% @tasks.each do |task| %>
-    <div class="card mb-3">
+    <div class="card mb-3 <%= 'bg-light' if task.completed %>">
       <div class="card-body">
-        <p class="fw-bold mb-1"> <%= link_to task.content, task_path(task) %></p>
-        <p class="text-muted small mb-2">難易度: <%= task.difficulty %> ／ 優先度: <%= task.priority %></p>
-        <%= link_to task.user.name, user_path(task.user), class: "small" %>
-        <%= render "likes/like_button", task: task %>
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <p class="fw-bold mb-1 <%= 'text-decoration-line-through text-muted' if task.completed %>">
+              <%= link_to task.content, task_path(task) %>
+            </p>
+            <p class="text-muted small mb-2">難易度: <%= task.difficulty %> ／ 優先度: <%= task.priority %></p>
+            <%= link_to task.user.name, user_path(task.user), class: "small" %>
+          </div>
+          <%= render "likes/like_button", task: task %>
+        </div>
       </div>
     </div>
   <% end %>
