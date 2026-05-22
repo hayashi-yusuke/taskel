@@ -18,6 +18,10 @@ Rails.application.routes.draw do
   get "/likes", to: "likes#index", as: :likes
   resources :users, only: [ :index, :new, :create, :edit, :show, :update, :destroy ] do
     resource :follow, only: [ :create, :destroy ]
+    member do
+      get :followings
+      get :followers
+    end
   end
 
   resources :tasks, only: [ :index, :show, :create, :edit, :update, :destroy ] do
