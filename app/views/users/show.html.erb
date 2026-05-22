@@ -6,7 +6,17 @@
   <div class="card-body">
     <div class="d-flex align-items-center gap-3">
       <div style="width: 60px; height: 60px; border-radius: 50%; background: #b5d4f4;"></div>
-      <h3 class="mb-0"><%= @user.name %>のプロフィール</h3>
+      <div>
+        <h3 class="mb-0"><%= @user.name %>のプロフィール</h3>
+        <div class="d-flex gap-3 mt-1">
+          <%= link_to followings_user_path(@user), class: "small text-decoration-none text-dark" do %>
+            フォロー <strong><%= @user.followings.count %></strong>
+          <% end %>
+          <%= link_to followers_user_path(@user), class: "small text-decoration-none text-dark" do %>
+            フォロワー <strong><%= @user.followers.count %></strong>
+          <% end %>
+        </div>
+      </div>
       <%= render "follows/follow_button",user: @user %>
     </div>
   </div>

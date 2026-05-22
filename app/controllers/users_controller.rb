@@ -31,6 +31,16 @@ class UsersController < ApplicationController
     @tasks = @user.tasks.where(completed: false)
   end
 
+  def followings
+    @user = User.find(params[:id])
+    @users = @user.followings
+  end
+
+  def followers
+    @user = User.find(params[:id])
+    @users = @user.followers
+  end
+
   def edit
     if params[:id].to_i != Current.user.id
       redirect_to mypage_path, alert: "アクセスできません"
