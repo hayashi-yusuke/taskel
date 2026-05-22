@@ -1,72 +1,26 @@
-<div class="container mt-4">
-  <div class="row">
+<% content_for :sidebar do %>
+  <%= render "shared/sidebar" %>
+<% end %>
 
-    <div class="col-md-5">
-      <div class="card mb-3">
-        <div class="card-body">
-          <div class="d-flex align-items-center gap-2", style="min-height: 80px;">
-            <div>
-              <h5 class="mb-0"><%= Current.user.name %></h5>
-              <%= link_to "プロフィール編集", edit_user_path(Current.user), class: "small" %>
-            </div>
-          </div>
-        </div>
-      </div>
+<h3 class="mb-3">マイタスク一覧</h3>
 
-      <div class="card">
-        <div class="card-body">
-          <h6 class="card-title">タスクを追加</h6>
-          <%= form_with model: @task do |f| %>
-            <div class="mb-3">
-              <%= f.text_field :content, placeholder: "タスクの内容を入力", class: "form-control" %>
-            </div>
-
-            <div class="mb-3">
-              <%= f.label :difficulty, "難易度", class: "form-label" %>
-              <div class="d-flex gap-3">
-                <% Task.difficulties.each_key do |level| %>
-                  <div class="form-check">
-                    <%= f.radio_button :difficulty, level, checked: level == "normal", class: "form-check-input" %>
-                    <%= f.label "difficulty_#{level}", level, class: "form-check-label" %>
-                  </div>
-                <% end %>
-              </div>
-            </div>
-
-            <div class="mb-4">
-              <%= f.label :priority, "優先度", class: "form-label" %>
-              <div class="d-flex gap-3">
-                <% Task.priorities.each_key do |level| %>
-                  <div class="form-check">
-                    <%= f.radio_button :priority, level, checked: level == "middle", class: "form-check-input" %>
-                    <%= f.label "priority_#{level}", level, class: "form-check-label" %>
-                  </div>
-                <% end %>
-              </div>
-            </div>
-
-            <%= f.submit "作成する", class: "btn btn-primary w-100" %>
-          <% end %>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-7">
-      <h3 class="mb-3">タスク一覧</h3>
-
-      <% Current.user.tasks.where(completed: false).each do |task| %>
-        <div class="card mb-3">
-          <div class="card-body">
-            <p class="fw-bold mb-1"><%= link_to task.content, task_path(task) %></p>
-            <p class="text-muted small mb-2">難易度 : <%= task.difficulty %> ／ 優先度 : <%= task.priority %></p>
-            <div class="d-flex gap-2">
-              <%= button_to "完了にする", complete_task_path(task), method: :patch, class: "btn btn-outline-primary btn-sm" %>
-              <%= link_to "編集", edit_task_path(task), class: "btn btn-outline-secondary btn-sm" %>
-              <%= button_to "削除", task_path(task), method: :delete, class: "btn btn-outline-danger btn-sm" %>
-            </div>
-          </div>
-        </div>
+<% Current.user.tasks.where(completed: false).each do |task| %>
+  <div class="card mb-3 task-card" id="task-<%= task.id %>">
+    <div class="d-flex align-items-stretch"> 
+      <%= button_to complete_task_path(task), method: :patch,
+          class: "check-area border-0 bg-transparent",
+          form_class: "check-area-form",
+          data: { task_id: task.id } do %>
+        <div class="check-circle" id="circle-<%= task.id %>"></div>
       <% end %>
+      <div class="card-body">
+        <p class="fw-bold mb-1"><%= link_to task.content, task_path(task) %></p>
+        <p class="text-muted small mb-2">難易度 : <%= task.difficulty %> ／ 優先度 : <%= task.priority %></p>
+        <div class="d-flex gap-2">
+          <%= link_to "編集", edit_task_path(task), class: "btn btn-outline-secondary btn-sm" %>
+          <%= button_to "削除", task_path(task), method: :delete, class: "btn btn-outline-danger btn-sm" %>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+<% end %>
