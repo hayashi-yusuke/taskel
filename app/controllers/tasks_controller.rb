@@ -68,7 +68,8 @@ class TasksController < ApplicationController
   def complete
     @task = Task.find(params[:id])
     @task.update(completed: !@task.completed)
-    redirect_to mypage_path
+    praises = ["最高だよ！", "すごい！", "天才すぎる！", "さすが！", "完璧！", "やればできる！", "素晴らしい！"]
+    redirect_to mypage_path, notice: "🎉 " + praises.sample
   end
 
   private
