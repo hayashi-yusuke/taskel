@@ -26,7 +26,7 @@
 <% @tasks.each do |task| %>
   <div class="card mb-3">
     <div class="card-body">
-      <p class="fw-bold mb-1"><%= task.content %></p>
+      <p class="fw-bold mb-1"><%= link_to task.content, task_path(task) %></p>
       <p class="text-muted small mb-0">難易度: <%= task.difficulty %> ／ 優先度: <%= task.priority %></p>
     </div>
   </div>
