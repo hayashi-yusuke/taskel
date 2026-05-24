@@ -30,16 +30,8 @@
   height: 24px;
   border-radius: 50%;
   border: 2px solid #adb5bd;
-  transition: all 0.3s;
 }
-.check-circle.checked {
-  background: #1D9E75;
-  border-color: #1D9E75;
-}
-.task-card {
-  transition: all 0.6s ease;
-  overflow: hidden;
-}
+
 .page-link {
   border-radius: 50% !important;
   width: 36px;
