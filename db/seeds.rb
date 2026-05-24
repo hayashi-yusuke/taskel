@@ -63,6 +63,26 @@ User.all.each do |user|
   end
 end
 
+users = User.all
+tasks = Task.all
+
+users.each do |user|
+  tasks.where.not(user_id: user.id).sample(5).each do |task|
+    Like.find_or_create_by!(user_id: user.id, task_id: task.id)
+  end
+end
+
+users.each do |user|
+  users.where.not(id: user.id).sample(3).each do |other_user|
+    Relationship.find_or_create_by!(
+      follower_id: user.id,
+      following_id: other_user.id
+    )
+  end
+end
+
 puts "シードデータの投入が完了しました！"
 puts "ユーザー数：#{User.count}人"
 puts "タスク数：#{Task.count}個"
+puts "エール数：#{Like.count}個"
+puts "フォロー数：#{Relationship.count}件"
