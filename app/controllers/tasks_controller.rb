@@ -3,12 +3,36 @@ class TasksController < ApplicationController
   before_action :authorize_task, only: [:edit, :update, :destroy]
 
   def index
-    if params[:q].present?
-      @tasks = Task.where(completed: false).where("content LIKE ?", "%#{params[:q]}%")
-    else
-      @tasks = Task.where(completed: false)
-    end
+    @tasks = case params[:status]
+             when "completed"
+               Task.where(completed: true)
+             when "all"
+               Task.all
+             else
+               Task.where(completed: false)
+             end
+    @tasks = @tasks.where(difficulty: params[:difficulty]) if params[:difficulty].present?
+    @tasks = @tasks.where(priority: params[:priority]) if params[:priority].present?
+    @tasks = @tasks.where("content LIKE ?", "%#{params[:q]}%") if params[:q].present?
+    
+    @tasks = case params[:sort]
+             when "oldest"
+               @tasks.order(created_at: :asc)
+             when "difficulty_high"
+               @tasks.order(difficulty: :desc)
+             when "difficulty_low"
+               @tasks.order(difficulty: :asc)
+             when "priority_high"
+               @tasks.order(priority: :desc)
+             when "priority_low"
+               @tasks.order(priority: :asc)
+             when "likes"
+               @tasks.left_joins(:likes).group(:id).order("COUNT(likes.id) DESC")
+             else
+               @tasks.order(created_at: :desc)
+             end.page(params[:page]).per(5)
   end
+
 
   def create
     @task = Current.user.tasks.build(task_params)
@@ -44,7 +68,8 @@ class TasksController < ApplicationController
   def complete
     @task = Task.find(params[:id])
     @task.update(completed: !@task.completed)
-    redirect_to mypage_path
+    praises = ["最高だよ！", "すごい！", "天才すぎる！", "さすが！", "完璧！", "やればできる！", "素晴らしい！"]
+    redirect_to mypage_path, notice: "🎉 " + praises.sample
   end
 
   private

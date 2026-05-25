@@ -1,0 +1,52 @@
+<div class="card mb-3">
+  <div class="card-body">
+    <div class="d-flex align-items-center gap-2" style="min-height: 80px;">
+      <div>
+        <h5 class="mb-0"><%= Current.user.name %></h5>
+        <%= link_to "プロフィール編集", edit_user_path(Current.user), class: "small" %>
+        <div class="d-flex gap-3 mt-2">
+          <%= link_to followings_user_path(Current.user), class: "small text-decoration-none text-dark" do %>
+            フォロー <strong><%= Current.user.followings.count %></strong>
+          <% end %>
+          <%= link_to followers_user_path(Current.user), class: "small text-decoration-none text-dark" do %>
+            フォロワー <strong><%= Current.user.followers.count %></strong>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-body">
+    <h6 class="card-title">タスクを追加</h6>
+    <%= form_with model: Task.new, url: tasks_path do |f| %>
+      <div class="mb-3">
+        <%= f.text_field :content, placeholder: "タスクの内容を入力", class: "form-control" %>
+      </div>
+      <div class="mb-3">
+        <%= f.label :difficulty, "難易度", class: "form-label" %>
+        <div class="d-flex gap-3">
+          <% Task.difficulties.each_key do |level| %>
+            <div class="form-check">
+              <%= f.radio_button :difficulty, level, checked: level == "normal", class: "form-check-input" %>
+              <%= f.label "difficulty_#{level}", level, class: "form-check-label" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="mb-4">
+        <%= f.label :priority, "優先度", class: "form-label" %>
+        <div class="d-flex gap-3">
+          <% Task.priorities.each_key do |level| %>
+            <div class="form-check">
+              <%= f.radio_button :priority, level, checked: level == "middle", class: "form-check-input" %>
+              <%= f.label "priority_#{level}", level, class: "form-check-label" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <%= f.submit "作成する", class: "btn btn-primary w-100" %>
+    <% end %>
+  </div>
+</div>

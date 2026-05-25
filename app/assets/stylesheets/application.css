@@ -8,3 +8,43 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+.check-area {
+  width: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid #dee2e6;
+  cursor: pointer;
+  transition: background 0.2s;
+  padding: 0;
+}
+.check-area-form {
+  display: flex;
+  align-items: stretch;
+}
+.check-area:hover {
+  background: #d1e7dd;
+}
+.check-circle {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid #adb5bd;
+}
+
+.page-link {
+  border-radius: 50% !important;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.page-item:first-child .page-link,
+.page-item:last-child .page-link,
+.page-item:nth-child(2) .page-link,
+.page-item:nth-last-child(2) .page-link {
+  border-radius: 18px !important;
+  width: auto;
+  padding: 0 12px;
+}
