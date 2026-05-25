@@ -14,7 +14,7 @@
     <header>
       <nav class="navbar navbar-dark bg-dark">
         <div class="container d-flex justify-content-between align-items-center">
-          <span class="navbar-brand">Taskel 管理画面</span>
+          <%= link_to "Taskel 管理画面", admin_top_path, class: "navbar-brand text-white" %>
           <div class="d-flex align-items-center">
             <%= link_to "ユーザー管理", admin_users_path, class: "nav-link text-white me-3" %>
             <%= link_to "タスク管理", admin_tasks_path, class: "nav-link text-white me-3" %>
