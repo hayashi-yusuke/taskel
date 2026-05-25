@@ -18,7 +18,7 @@ users_data = [
   { name: "渡辺 さくら", email_address: "sakura@example.com" },
   { name: "山本 拓也", email_address: "takuya@example.com" },
   { name: "中村 あかり", email_address: "akari@example.com" },
-  { name: "小林 翔太", email_address: "shota@example.com" },
+  { name: "小林 翔太", email_address: "shota@example.com" }
 ]
 
 users_data.each do |data|
@@ -44,7 +44,7 @@ task_contents = [
   "料理を作る",
   "映画を1本見る",
   "睡眠時間を記録する",
-  "次週の計画を立てる",
+  "次週の計画を立てる"
 ]
 
 difficulties = [ :easy, :normal, :hard ]
@@ -90,7 +90,7 @@ comment_contents = [
   "いいですね！",
   "継続は力なり！",
   "毎日コツコツ大事ですね！",
-  "お互い頑張りましょう！",
+  "お互い頑張りましょう！"
 ]
 
 users.each do |user|

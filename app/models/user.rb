@@ -14,7 +14,7 @@ class User < ApplicationRecord
   has_many :followers, through: :passive_relationships, source: :follower
 
   has_many :likes, dependent: :destroy
-  
+
   normalizes :email_address, with: ->(e) { e.strip.downcase }
 
   validates :name, presence: true
