@@ -1,5 +1,9 @@
 class User < ApplicationRecord
   has_secure_password
+  generates_token_for :password_reset, expires_in: 15.minutes do
+    password_salt&.last(10)
+  end
+
   has_many :sessions, dependent: :destroy
   has_many :tasks, dependent: :destroy
   has_many :comments, dependent: :destroy
@@ -14,7 +18,7 @@ class User < ApplicationRecord
   has_many :followers, through: :passive_relationships, source: :follower
 
   has_many :likes, dependent: :destroy
-  
+
   normalizes :email_address, with: ->(e) { e.strip.downcase }
 
   validates :name, presence: true

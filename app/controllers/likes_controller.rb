@@ -1,7 +1,6 @@
 class LikesController < ApplicationController
-
   def index
-    @tasks = Current.user.likes.includes(:task).map{|like| like.task }
+    @tasks = Current.user.likes.includes(:task).map { |like| like.task }
   end
 
   def create

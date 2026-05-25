@@ -1,13 +1,15 @@
 require "test_helper"
 
 class LikesControllerTest < ActionDispatch::IntegrationTest
-  test "should get create" do
-    get likes_create_url
-    assert_response :success
+  setup { sign_in_as(users(:one)) }
+
+  test "should create like" do
+    post task_like_url(tasks(:two))
+    assert_redirected_to root_url
   end
 
-  test "should get destroy" do
-    get likes_destroy_url
-    assert_response :success
+  test "should destroy like" do
+    delete task_like_url(tasks(:one))
+    assert_redirected_to root_url
   end
 end

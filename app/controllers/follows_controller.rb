@@ -2,7 +2,7 @@ class FollowsController < ApplicationController
   def create
     @user = User.find(params[:user_id])
     follow = Current.user.active_relationships.build(following: @user)
-    
+
     if follow.save
       redirect_back fallback_location: root_path, notice: "フォローしました！"
     else
