@@ -2,7 +2,7 @@
   <%= render "shared/sidebar" %>
 <% end %>
 
-<% if params[:q].present? %>
+<% if params[:user_q].present? %>
   <h3 class="mb-4">ユーザー検索結果</h3>
   <% if @users.empty? %>
     <p class="text-muted">一致するユーザーは見つかりませんでした</p>

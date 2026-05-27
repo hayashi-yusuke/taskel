@@ -6,8 +6,8 @@ class UsersController < ApplicationController
   end
 
   def index
-    if params[:q].present?
-      @users = User.where("name LIKE ?", "%#{params[:q]}%")
+    if params[:user_q].present?
+      @users = User.where("name LIKE ?", "%#{params[:user_q]}%")
     else
       @users = User.none
     end
