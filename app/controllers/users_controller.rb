@@ -54,7 +54,7 @@ class UsersController < ApplicationController
 
     if Current.user.email_address == "guest@example.com"
       if user_params[:email_address].present? || user_params[:password].present?
-        redirect_to mypage_path, alert: "ゲストユーザーはメールアドレスとパスワードメールアドレスとパスワードを変更できません"
+        redirect_to mypage_path, alert: "ゲストユーザーはメールアドレスとパスワードを変更できません"
         return
       end
     end
