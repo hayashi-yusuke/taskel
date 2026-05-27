@@ -8,6 +8,10 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+a {
+  text-decoration: none;
+}
+
 .check-area {
   width: 56px;
   display: flex;
