@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   allow_unauthenticated_access only: [ :new, :create ]
+  before_action :set_user, only: [ :show, :followings, :followers ]
 
   def mypage
     @task = Task.new
@@ -27,17 +28,14 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
     @tasks = @user.tasks.where(completed: false).page(params[:page]).per(5)
   end
 
   def followings
-    @user = User.find(params[:id])
     @users = @user.followings
   end
 
   def followers
-    @user = User.find(params[:id])
     @users = @user.followers
   end
 
@@ -76,5 +74,8 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :email_address, :password, :password_confirmation)
+  end
+  def set_user
+    @user = User.find(params[:id])
   end
 end

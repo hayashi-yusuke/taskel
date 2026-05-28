@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
+  before_action :set_task
   def create
-    @task = Task.find(params[:task_id])
     @comment = @task.comments.build(comment_params)
     @comment.user = Current.user
     if @comment.save
@@ -11,7 +11,6 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @task = Task.find(params[:task_id])
     @comment = @task.comments.find(params[:id])
     @comment.destroy
     redirect_to @task, notice: "コメントを削除しました"
@@ -20,5 +19,8 @@ class CommentsController < ApplicationController
   private
   def comment_params
     params.require(:comment).permit(:content)
+  end
+  def set_task
+    @task = Task.find(params[:task_id])
   end
 end
