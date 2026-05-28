@@ -1,5 +1,4 @@
 class LikesController < ApplicationController
-
   def index
     task_ids = Current.user.likes.pluck(:task_id)
     @tasks = Task.where(id: task_ids).page(params[:page]).per(5)

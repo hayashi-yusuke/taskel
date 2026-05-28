@@ -6,8 +6,8 @@ class UsersController < ApplicationController
   end
 
   def index
-    if params[:q].present?
-      @users = User.where("name LIKE ?", "%#{params[:q]}%")
+    if params[:user_q].present?
+      @users = User.where("name LIKE ?", "%#{params[:user_q]}%")
     else
       @users = User.none
     end
@@ -54,7 +54,7 @@ class UsersController < ApplicationController
 
     if Current.user.email_address == "guest@example.com"
       if user_params[:email_address].present? || user_params[:password].present?
-        redirect_to mypage_path, alert: "ゲストユーザーはメールアドレスとパスワードメールアドレスとパスワードを変更できません"
+        redirect_to mypage_path, alert: "ゲストユーザーはメールアドレスとパスワードを変更できません"
         return
       end
     end

@@ -1,10 +1,9 @@
 Rails.application.routes.draw do
-
   namespace :admin do
-    resource :session, only: [:new, :create, :destroy]
+    resource :session, only: [ :new, :create, :destroy ]
     get "top", to: "homes#top", as: :top
-    resources :users, only: [:index, :destroy]
-    resources :tasks, only: [:index, :destroy]
+    resources :users, only: [ :index, :destroy ]
+    resources :tasks, only: [ :index, :destroy ]
   end
 
   resource :session
