@@ -1,13 +1,15 @@
-<% if authenticated? %>
-  <% unless Current.user == user %>
-    <% if Current.user.followings.include?(user) %>
-      <%= button_to user_follow_path(user), method: :delete, class: "btn btn-secondary btn-sm" do %>
-        フォロー中
-      <% end %>
-    <% else %>
-      <%= button_to user_follow_path(user), method: :post, class: "btn btn-primary btn-sm" do %>
-        フォローする
+<div id="follow_user_<%= user.id %>">
+  <% if authenticated? %>
+    <% unless Current.user == user %>
+      <% if Current.user.followings.include?(user) %>
+        <%= button_to user_follow_path(user), method: :delete, class: "btn btn-secondary btn-sm" do %>
+          フォロー中
+        <% end %>
+      <% else %>
+        <%= button_to user_follow_path(user), method: :post, class: "btn btn-primary btn-sm" do %>
+          フォローする
+        <% end %>
       <% end %>
     <% end %>
   <% end %>
-<% end %>
+</div>
