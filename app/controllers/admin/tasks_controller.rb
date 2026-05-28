@@ -1,9 +1,9 @@
 class Admin::TasksController < Admin::ApplicationController
   def index
     if params[:q].present?
-      @tasks = Task.where("content LIKE ?", "%#{params[:q]}%")
+      @tasks = Task.where("content LIKE ?", "%#{params[:q]}%").page(params[:page]).per(20)
     else
-      @tasks = Task.all
+      @tasks = Task.all.page(params[:page]).per(20)
     end
   end
 
