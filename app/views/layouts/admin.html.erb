@@ -24,12 +24,7 @@
       </nav>
     </header>
 
-    <% if flash[:notice] %>
-      <div class="alert alert-success mx-3 mt-3"><%= flash[:notice] %></div>
-    <% end %>
-    <% if flash[:alert] %>
-      <div class="alert alert-danger mx-3 mt-3"><%= flash[:alert] %></div>
-    <% end %>
+    <%= render "shared/flash" %>
 
     <%= yield %>
   </body>
