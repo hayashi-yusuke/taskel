@@ -1,36 +1,36 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:edit, :update, :destroy]
-  before_action :authorize_task, only: [:edit, :update, :destroy]
+  before_action :set_task, only: [ :edit, :update, :destroy ]
+  before_action :authorize_task, only: [ :edit, :update, :destroy ]
 
   def index
     @tasks = case params[:status]
-             when "completed"
+    when "completed"
                Task.where(completed: true)
-             when "all"
+    when "all"
                Task.all
-             else
+    else
                Task.where(completed: false)
-             end
+    end
     @tasks = @tasks.where(difficulty: params[:difficulty]) if params[:difficulty].present?
     @tasks = @tasks.where(priority: params[:priority]) if params[:priority].present?
     @tasks = @tasks.where("content LIKE ?", "%#{params[:q]}%") if params[:q].present?
-    
+
     @tasks = case params[:sort]
-             when "oldest"
+    when "oldest"
                @tasks.order(created_at: :asc)
-             when "difficulty_high"
+    when "difficulty_high"
                @tasks.order(difficulty: :desc)
-             when "difficulty_low"
+    when "difficulty_low"
                @tasks.order(difficulty: :asc)
-             when "priority_high"
+    when "priority_high"
                @tasks.order(priority: :desc)
-             when "priority_low"
+    when "priority_low"
                @tasks.order(priority: :asc)
-             when "likes"
+    when "likes"
                @tasks.left_joins(:likes).group(:id).order("COUNT(likes.id) DESC")
-             else
+    else
                @tasks.order(created_at: :desc)
-             end.page(params[:page]).per(5)
+    end.page(params[:page]).per(5)
   end
 
 
@@ -68,7 +68,7 @@ class TasksController < ApplicationController
   def complete
     @task = Task.find(params[:id])
     @task.update(completed: !@task.completed)
-    praises = ["最高だよ！", "すごい！", "天才すぎる！", "さすが！", "完璧！", "やればできる！", "素晴らしい！"]
+    praises = [ "最高だよ！", "すごい！", "天才すぎる！", "さすが！", "完璧！", "やればできる！", "素晴らしい！" ]
     redirect_to mypage_path, notice: "🎉 " + praises.sample
   end
 
@@ -85,7 +85,7 @@ class TasksController < ApplicationController
   def authorize_task
     if @task.user_id != Current.user.id
       redirect_to tasks_path, alert: "アクセスできません"
-      return
+      nil
     end
   end
 end

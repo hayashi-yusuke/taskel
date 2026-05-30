@@ -4,8 +4,7 @@
 仲間と助け合いながらタスク管理ができるSNSサイト
 
 ## テーマを選んだ理由
-タスク管理アプリを使い始めても、都度タスクを入力する
-手間が面倒になり、続けることができませんでした。
+タスク管理アプリを使い始めても、都度タスクを入力する手間が面倒になり、続けることができませんでした。
 タスク管理をした方が良いとはわかっていても、
 やるべきことを先延ばしにしてしまったり、
 こなしても達成感がなく、モチベーションが続かないと
@@ -26,13 +25,14 @@
 - 誰かと一緒に頑張りたい時
 
 ## 設計書
-- uiflows
-- ER図
-- 
+- [uiflows](https://drive.google.com/file/d/1-qoqQdJ-F4PP8Sx-cz6NMU9iQxAllS1X/view?usp=sharing)
+- [ER図](https://drive.google.com/file/d/1EHkYD9FGOnsyA6Jyo1Cf4EeEQpci3IiJ/view?usp=sharing)
+- [テーブル定義書](https://docs.google.com/spreadsheets/d/1yEiivTNR540vpk96RjcTFUXIYo8kHuITmiom3zclP10/edit?usp=sharing)
+- [アプリケーション詳細設計書](https://docs.google.com/spreadsheets/d/1IWnCaqN4XGaDYP_6SGdfsyVtxvZHmV7AQCdDk-jaLak/edit?usp=sharing)
 ## 開発環境
-- OS：Linux(CentOS)
+- OS：Linux(Ubuntu 24.04)
 - 言語：HTML,CSS,JavaScript,Ruby,SQL
-- フレームワーク：Ruby on Rails
-- JSライブラリ：jQuery
+- フレームワーク：Ruby on Rails 8
 - IDE：VSCode + EC2(SSH接続)
-- データベース：SQLite
+- データベース：SQLite(開発環境)/ MySQL（本番環境）
+- 使用ライブラリ：Bootstrap 5.3, Turbo, kaminari, RSpec, FactoryBot

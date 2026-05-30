@@ -1,7 +1,7 @@
 class LikesController < ApplicationController
-
   def index
-    @tasks = Current.user.likes.includes(:task).map{|like| like.task }
+    task_ids = Current.user.likes.pluck(:task_id)
+    @tasks = Task.where(id: task_ids).page(params[:page]).per(5)
   end
 
   def create
