@@ -28,7 +28,11 @@ class UsersController < ApplicationController
   end
 
   def show
-    @tasks = @user.tasks.where(completed: false).page(params[:page]).per(5)
+    if params[:tab] == "completed"
+      @tasks = @user.tasks.where(completed: true).page(params[:page]).per(5)
+    else
+      @tasks = @user.tasks.where(completed: false).page(params[:page]).per(5)
+    end
   end
 
   def followings
