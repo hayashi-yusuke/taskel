@@ -1,5 +1,6 @@
 <% if flash[:notice] %>
-  <div class="alert alert-success mx-3 mt-3">
+  <div class="alert alert-success mx-3 mt-3
+              <%= flash[:notice].include?("🎉") ? "text-center" : "" %>">
     <%= flash[:notice] %>
   </div>
 <% end %>

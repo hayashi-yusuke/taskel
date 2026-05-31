@@ -5,12 +5,14 @@
 <h3 class="mb-3">マイタスク一覧</h3>
 
 <% Current.user.tasks.where(completed: false).each do |task| %>
-  <div class="card mb-3 task-card" id="task-<%= task.id %>">
+  <div class="card mb-3 task-card"
+       id="task-<%= task.id %>"
+       data-controller="task">
     <div class="d-flex align-items-stretch"> 
       <%= button_to complete_task_path(task), method: :patch,
           class: "check-area border-0 bg-transparent",
           form_class: "check-area-form",
-          data: { task_id: task.id } do %>
+          data: { task_id: task.id, action: "click->task#complete" } do %>
         <div class="check-circle" id="circle-<%= task.id %>"></div>
       <% end %>
       <div class="card-body">

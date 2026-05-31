@@ -34,6 +34,15 @@ a {
   height: 24px;
   border-radius: 50%;
   border: 2px solid #adb5bd;
+  background-color: transparent;
+  /* colorとborder-colorの変化を0.2sかけてなめらかにする */
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+/* .check-circle-active クラスが付いたら色が変わる */
+/* JavaScriptからこのクラスを追加することで発動する */
+.check-circle-active {
+  background-color: #5cb85c; /* 緑色に塗りつぶされる */
+  border-color: #5cb85c;     /* 枠線も同じ緑に */
 }
 
 .page-link {
@@ -51,4 +60,19 @@ a {
   border-radius: 18px !important;
   width: auto;
   padding: 0 12px;
+}
+@keyframes task-disappear {
+  from {
+    opacity: 1;
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+  to {
+    opacity: 0;
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+}
+.task-disappear {
+  animation: task-disappear 0.2s ease-in forwards;
 }
