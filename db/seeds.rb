@@ -81,7 +81,6 @@ users.each do |user|
   end
 end
 
-# コメントデータの追加
 comment_contents = [
   "頑張ってください！",
   "一緒に頑張りましょう！",
