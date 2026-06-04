@@ -20,7 +20,9 @@
           <td><%= user.name %></td>
           <td><%= user.email_address %></td>
           <td>
-            <%= button_to "削除", admin_user_path(user), method: :delete %>
+            <%= button_to "削除", admin_user_path(user),
+                method: :delete,
+                data: { turbo_confirm: "本当に削除しますか？" } %>
           </td>
         </tr>
       <% end %>
