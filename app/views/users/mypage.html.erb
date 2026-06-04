@@ -22,7 +22,10 @@
             <p class="text-muted small mb-2">難易度 : <%= task.difficulty %> ／ 優先度 : <%= task.priority %></p>
             <div class="d-flex gap-2 align-items-center">
               <%= link_to "編集", edit_task_path(task), class: "btn btn-outline-secondary btn-sm" %>
-              <%= button_to "削除", task_path(task), method: :delete, class: "btn btn-outline-danger btn-sm" %>
+              <%= button_to "削除", task_path(task),
+                  method: :delete,
+                  class: "btn btn-outline-danger btn-sm",
+                  data: { turbo_confirm: "本当に削除しますか？" } %>
             </div>
           </div>
           <div class="d-flex flex-column align-items-end gap-1">
