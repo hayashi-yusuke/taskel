@@ -41,7 +41,10 @@
         <p class="mb-1"><%= comment.content %></p>
         <p class="text-muted small"><%= comment.created_at.strftime("%Y年%m月%d日 %H:%M") %></p>
         <% if comment.user_id == Current.user.id %>
-          <%= button_to "削除",task_comment_path(@task, comment), method: :delete, class: "btn btn-outline-danger btn-sm" %>
+          <%= button_to "削除",task_comment_path(@task, comment),
+          method: :delete,
+          class: "btn btn-outline-danger btn-sm",
+          data: { turbo_confirm: "本当に削除しますか？" } %>
         <% end %>
       </li>
     <% end %>
