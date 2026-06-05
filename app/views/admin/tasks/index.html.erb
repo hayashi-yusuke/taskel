@@ -23,7 +23,9 @@
           <td><%= task.user.name %></td>
           <td><%= task.difficulty %></td>
           <td><%= task.priority %></td>
-          <td><%= button_to "削除", admin_task_path(task), method: :delete %></td>
+          <td><%= button_to "削除", admin_task_path(task),
+                  method: :delete,
+                  data: { turbo_confirm: "本当に削除しますか？" } %></td>
         </tr>
       <% end %>
     </tbody>

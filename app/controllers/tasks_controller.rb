@@ -3,36 +3,13 @@ class TasksController < ApplicationController
   before_action :authorize_task, only: [ :edit, :update, :destroy ]
 
   def index
-    @tasks = case params[:status]
-    when "completed"
-               Task.where(completed: true)
-    when "all"
-               Task.all
-    else
-               Task.where(completed: false)
-    end
-    @tasks = @tasks.where(difficulty: params[:difficulty]) if params[:difficulty].present?
-    @tasks = @tasks.where(priority: params[:priority]) if params[:priority].present?
-    @tasks = @tasks.where("content LIKE ?", "%#{params[:q]}%") if params[:q].present?
-
-    @tasks = case params[:sort]
-    when "oldest"
-               @tasks.order(created_at: :asc)
-    when "difficulty_high"
-               @tasks.order(difficulty: :desc)
-    when "difficulty_low"
-               @tasks.order(difficulty: :asc)
-    when "priority_high"
-               @tasks.order(priority: :desc)
-    when "priority_low"
-               @tasks.order(priority: :asc)
-    when "likes"
-               @tasks.left_joins(:likes).group(:id).order("COUNT(likes.id) DESC")
-    else
-               @tasks.order(created_at: :desc)
-    end.page(params[:page]).per(5)
+    @tasks = Task.by_status(params[:status])
+                 .by_difficulty(params[:difficulty])
+                 .by_priority(params[:priority])
+                 .search_content(params[:q])
+                 .sort_by_option(params[:sort])
+                 .page(params[:page]).per(5)
   end
-
 
   def create
     @task = Current.user.tasks.build(task_params)
