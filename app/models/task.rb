@@ -21,12 +21,12 @@ class Task < ApplicationRecord
   scope :sort_by_option, ->(sort) {
     case sort
     when "oldest"            then order(created_at: :asc)
-      when "difficulty_high" then order(difficulty: :desc)
-      when "difficulty_low"  then order(difficulty: :asc)
-      when "priority_high"   then order(priority: :desc)
-      when "priority_low"    then order(priority: :asc)
-      when "likes"           then left_joins(:likes).group(:id).order("COUNT(likes.id) DESC")
-      else                        order(created_at: :desc)
+    when "difficulty_high" then order(difficulty: :desc)
+    when "difficulty_low"  then order(difficulty: :asc)
+    when "priority_high"   then order(priority: :desc)
+    when "priority_low"    then order(priority: :asc)
+    when "likes"           then left_joins(:likes).group(:id).order("COUNT(likes.id) DESC")
+    else                        order(created_at: :desc)
     end
   }
 end
