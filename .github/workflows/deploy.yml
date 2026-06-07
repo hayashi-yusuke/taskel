@@ -19,12 +19,13 @@ jobs:
 
       - name: Deploy
         run: |
-          ssh -i ~/.ssh/deploy_key ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} '
-            cd ${{ secrets.DEPLOY_PATH }} &&
-            git pull origin main &&
-            bundle install &&
-            RAILS_ENV=production rails db:migrate &&
-            RAILS_ENV=production rails assets:precompile &&
-            pkill -f puma; sleep 2;
+          ssh -i ~/.ssh/deploy_key ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
+            cd /home/ubuntu/taskel
+            git pull origin main
+            bundle install
+            RAILS_ENV=production rails db:migrate
+            RAILS_ENV=production rails assets:precompile
+            pkill -f puma || true
+            sleep 2
             nohup bundle exec puma -C config/puma.rb -e production > log/production.log 2>&1 &
-          '
+          EOF
