@@ -4,6 +4,9 @@ class UsersController < ApplicationController
 
   def mypage
     @task = Task.new
+    @tasks = Current.user.tasks
+                    .where(completed: false)
+                    .includes(:user, :comments, :likes)
   end
 
   def index

@@ -3,7 +3,8 @@ class TasksController < ApplicationController
   before_action :authorize_task, only: [ :edit, :update, :destroy ]
 
   def index
-    @tasks = Task.by_status(params[:status])
+    @tasks = Task.includes(:user, :comments, :likes)
+                 .by_status(params[:status])
                  .by_difficulty(params[:difficulty])
                  .by_priority(params[:priority])
                  .search_content(params[:q])
